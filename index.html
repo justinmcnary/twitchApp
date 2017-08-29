@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <title>Get Twitchy</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>GET tWITCHY!</h1>
+    </div>
+    <div class="input-group">
+      <input type="text" class="form-control search-term" placeholder="..." aria-describedby="basic-addon2">
+      <span class="input-group-addon search-button" id="basic-addon2">Search</span>
+    </div>
+    <div class="button-holster">
+      <div class="row">
+        <div class="col-md-3">
+          <button type="button" id="top-25" class="btn btn-primary">Top-25</button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" id="all-friends" class="btn btn-primary">All Friends </button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" id="users" class="btn btn-primary">Friends Online</button>
+        </div>
+        <div class="col-md-3">
+          <button type="button" id="offline" class="btn btn-primary">Friends Offline</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="logo"></div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

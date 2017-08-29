@@ -1,0 +1,41 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.image-col {
+  width: 20%;
+}
+
+.profile-image {
+  max-width: 150px;
+}
+
+.game-on {
+  max-width: 75px;
+}
+
+#users {
+  width: 100%;
+}
+#top-25 {
+  width: 100%;
+}
+#offline {
+  width: 100%;
+}
+#all-friends {
+  width: 100%;
+}
+
+@media only screen and (max-width: 750px) {
+  .profile-image {
+    max-width: 300px;
+  }
+}
