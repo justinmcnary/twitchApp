@@ -38,4 +38,7 @@ body {
   .profile-image {
     max-width: 300px;
   }
+
+  .button-holster row col-md-3 {
+    margin-top: 10px;
 }

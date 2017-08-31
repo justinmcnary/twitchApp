@@ -3,7 +3,6 @@ const secret = 'hh8fg5s1t7ei58ity6e83zw7x93v6u';
 let offline = [];
 let online = [];
 let state = [];
-let channelID = '';
 let userArray = [
   'ESL_SC2',
   'OgamingSC2',
@@ -41,7 +40,6 @@ let twitchTime = () => {
       showUsers();
     }
   });
-  twitchUser();
 };
 
 //get user
@@ -157,6 +155,7 @@ $(document).keypress(function(e) {
 $('#top-25').on('click', function() {
   $('#logo').html(`<div></div>`);
   twitchTime();
+  console.log(state);
 });
 
 //show online users
@@ -179,3 +178,4 @@ $('#all-friends').on('click', function() {
 });
 
 twitchTime();
+twitchUser();
