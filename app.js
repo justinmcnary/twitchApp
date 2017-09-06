@@ -221,7 +221,7 @@ $('#users').on('click', function() {
 });
 
 //show users offline
-$('#offline').on('click', function() {
+$('#user-offline').on('click', function() {
   $('#logo').html(`<div></div>`);
   showFriendsOffline();
 });
