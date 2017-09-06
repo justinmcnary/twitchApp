@@ -111,10 +111,10 @@ const displayError = () => {
 };
 
 //render to DOM
-let showUsers = () => {
+const showUsers = () => {
   state.forEach(val => {
     $('#logo').prepend(`
-    <div class='row align-items-start'>
+    <div class='row'>
     <div class="col-md-3 image-col">
       <img class="profile-image" src=${val.logo}>
     </div>
@@ -135,7 +135,7 @@ const showOffline = val => {
     val.logo = 'http://68.media.tumblr.com/bc7c918db6b7b50377dea52c27e865b4/tumblr_inline_n9tbr4Hu6p1qgp297.png';
   }
   $('#logo').prepend(`
-    <div class='row align-items-start'>
+    <div class='row'>
     <div class="col-md-3 image-col">
       <img class="profile-image" src=${val.logo}>
     </div>
@@ -149,7 +149,7 @@ const showOffline = val => {
 
 const showOnline = val => {
   $('#logo').prepend(`
-    <div class='row align-items-start'>
+    <div class='row'>
     <div class="col-md-3 image-col">
       <img class="profile-image" src=${val.stream.channel.logo}>
     </div>
