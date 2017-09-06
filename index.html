@@ -6,41 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="main.css">
+  <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
   <title>Get Twitchy</title>
 </head>
 
 <body>
+  <header class='top navbar navbar-default navbar-fixed-top' role='header'>
+    <div class="container">
+      <a href="#" class="navbar-brand pull left">Twitchy</a>
+      <button class="navbar-toggle" data-toggle="collapse" data-target='.navbar-collapse'>
+        <span class='glyphicon glyphicon-align-justify'></span>
+      </button>
+      <nav class="navbar-collapse collapse" role="navigation">
+        <ul class="navbar-nav nav">
+          <li><a href="#" id="top-25">Featured</a></li>
+          <li><a href="#" id="all-friends">Friends</a></li>
+          <li><a href="#" id="users">Friends Online</a></li>
+          <li><a href="#" id="offline">Friends Offline</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <div class="container">
     <div class="jumbotron">
-      <h1>GET tWITCHY!</h1>
+      <h1>tWITCHY!</h1>
+      <p>The quickest way to see whats up on TWITCH!</p>
     </div>
     <div class="input-group">
       <input type="text" class="form-control search-term" placeholder="..." aria-describedby="basic-addon2">
       <span class="input-group-addon search-button" id="basic-addon2">Search</span>
     </div>
-    <div class="button-holster">
-      <div class="row">
-        <div class="col-md-3">
-          <button type="button" id="top-25" class="btn btn-primary">Featured</button>
-        </div>
-        <div class="col-md-3">
-          <button type="button" id="all-friends" class="btn btn-primary">All Friends </button>
-        </div>
-        <div class="col-md-3">
-          <button type="button" id="users" class="btn btn-primary">Friends Online</button>
-        </div>
-        <div class="col-md-3">
-          <button type="button" id="offline" class="btn btn-primary">Friends Offline</button>
-        </div>
-      </div>
-    </div>
+
     <div class="container">
       <div id="logo"></div>
     </div>
   </div>
 
+  <footer class="bs-footer navbar-fixed-bottom">
+    <div class="container footer">
+      <p><a href="https://justinmcnary.github.io/portfolio/">JMC</a></p>
+    </div>
+  </footer>
+
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
 </body>
 

@@ -1,8 +1,10 @@
 const apiKEY = 'pdp56o0lme1di0rehahlqbaykx2v90';
-const secret = 'hh8fg5s1t7ei58ity6e83zw7x93v6u';
 let offline = [];
 let online = [];
 let state = [];
+let searchName = '';
+let searchResult = [];
+let searchResultOffline = [];
 let userArray = [
   'ESL_SC2',
   'OgamingSC2',
@@ -26,7 +28,6 @@ let twitchTime = () => {
     },
     success: data => {
       state = [];
-      // console.log(data);
       let length = data.featured.length;
       let element = data.featured;
       for (var i = 0; i < length; i++) {
@@ -34,7 +35,8 @@ let twitchTime = () => {
           name: element[i].stream.channel.name,
           logo: element[i].stream.channel.logo,
           game: element[i].stream.channel.game,
-          text: element[i].text
+          text: element[i].text,
+          link: element[i].stream.channel.url
         });
       }
       showUsers();
@@ -71,6 +73,43 @@ let twitchUser = () => {
   });
 };
 
+//search for user
+let searchForUser = () => {
+  searchResult = [];
+  searchResultOffline = [];
+  $.ajax({
+    url: ` https://api.twitch.tv/kraken/streams/${searchName}`,
+    headers: {
+      'Client-ID': `${apiKEY}`
+    },
+    success: data => {
+      if (data.stream !== null) {
+        searchResult.push(data);
+        showSearchResultsOnline();
+      } else if (data.stream === null) {
+        $.ajax({
+          url: `https://api.twitch.tv/kraken/users/${searchName}`,
+          headers: {
+            'Client-ID': `${apiKEY}`
+          },
+          success: data => {
+            searchResultOffline.push(data);
+            showSearchResultsOffline();
+          }
+        });
+      }
+    }
+  });
+};
+
+//error function
+const displayError = () => {
+  $('#logo').prepend(`
+  <div class="container">
+    <h1>USER NOT FOUND PLEASE TRY AGAIN.</h1>
+  </div>`);
+};
+
 //render to DOM
 let showUsers = () => {
   state.forEach(val => {
@@ -81,73 +120,91 @@ let showUsers = () => {
     </div>
     <div class="col-md-9">
       <h3>${val.name}</h3>
-      <h6>${val.game}</h6>
+      <h4>${val.game} <a target='_blank' href='${val.link}'>Live Feed</a></h4>
       ${val.text}
     </div>
     </div>`);
   });
 };
 
-//show friends online
-let showFriendsOnline = () => {
-  online.forEach(val => {
-    $('#logo').prepend(`
+const showOffline = val => {
+  if (val.bio == null) {
+    val.bio = 'Super sweet.';
+  }
+  if (val.logo == null) {
+    val.logo = 'http://68.media.tumblr.com/bc7c918db6b7b50377dea52c27e865b4/tumblr_inline_n9tbr4Hu6p1qgp297.png';
+  }
+  $('#logo').prepend(`
+    <div class='row align-items-start'>
+    <div class="col-md-3 image-col">
+      <img class="profile-image" src=${val.logo}>
+    </div>
+    <div class="col-md-9">
+      <h3>${val.name}</h3>
+      ${val.bio}
+      <img class="game-on" src="http://sdtimes.com/wp-content/uploads/2014/10/goneoffline.png">
+    </div>
+    </div>`);
+};
+
+const showOnline = val => {
+  $('#logo').prepend(`
     <div class='row align-items-start'>
     <div class="col-md-3 image-col">
       <img class="profile-image" src=${val.stream.channel.logo}>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <h3>${val.stream.channel.name}</h3>
       <h6>${val.stream.game}</h6>
       ${val.stream.channel.status}
-    </div>
-    <div class="col-md-1">
       <img class="game-on" src="https://pbs.twimg.com/profile_images/769263729666060290/dEWknTTh.jpg">
     </div>
     </div>`);
+};
+
+//show friends online
+let showFriendsOnline = () => {
+  online.forEach(val => {
+    showOnline(val);
   });
 };
 
 //show friends offline
 let showFriendsOffline = () => {
   offline.forEach(val => {
-    if (val.bio == null) {
-      val.bio = 'Super sweet.';
-    }
-    if (val.logo == null) {
-      val.logo = 'http://68.media.tumblr.com/bc7c918db6b7b50377dea52c27e865b4/tumblr_inline_n9tbr4Hu6p1qgp297.png';
-    }
-    $('#logo').prepend(`
-    <div class='row align-items-start'>
-    <div class="col-md-3 image-col">
-      <img class="profile-image" src=${val.logo}>
-    </div>
-    <div class="col-md-8">
-      <h3>${val.name}</h3>
-      ${val.bio}
-    </div>
-    <div class="col-md-1">
-      <img class="game-on" src="http://img4.wikia.nocookie.net/__cb8/offgame/images/5/50/Wiki-background">
-    </div>
-    </div>`);
+    showOffline(val);
+  });
+};
+
+//show search results
+let showSearchResultsOffline = () => {
+  searchResultOffline.forEach(val => {
+    showOffline(val);
+  });
+};
+
+let showSearchResultsOnline = () => {
+  searchResult.forEach(val => {
+    showOnline(val);
   });
 };
 
 //click handlers
 //search
 $('#basic-addon2').on('click', function() {
-  channelID = $('.search-term').val();
-  search();
-  console.log(channelID);
+  $('#logo').html(`<div></div>`);
+  searchName = $('.search-term').val();
+  searchForUser();
+  $('.search-term').val('');
 });
 
 //search enter press
 $(document).keypress(function(e) {
   var keycode = e.keyCode ? e.keyCode : e.which;
   if (keycode == '13') {
-    channelID = $('.search-term').val();
-    console.log(channelID);
-    search();
+    $('#logo').html(`<div></div>`);
+    searchName = $('.search-term').val();
+    searchForUser();
   }
 });
 
@@ -155,7 +212,6 @@ $(document).keypress(function(e) {
 $('#top-25').on('click', function() {
   $('#logo').html(`<div></div>`);
   twitchTime();
-  console.log(state);
 });
 
 //show online users
@@ -175,6 +231,11 @@ $('#all-friends').on('click', function() {
   $('#logo').html(`<div></div>`);
   showFriendsOnline();
   showFriendsOffline();
+});
+
+// AJAX error handling
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  displayError();
 });
 
 twitchTime();

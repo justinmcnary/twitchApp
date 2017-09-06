@@ -4,9 +4,55 @@ body {
   width: 100%;
 }
 
+body {
+  background-image: url('https://images.unsplash.com/photo-1498736297812-3a08021f206f?dpr=1&auto=format&fit=crop&w=1500&h=991&q=80&cs=tinysrgb&crop=');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.glyphicon {
+  color: white;
+}
+
+.navbar-default {
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
+  border: none;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  font-family: 'Bungee', cursive;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+
+.jumbotron {
+  margin-top: 80px;
+  text-align: center;
+  opacity: .9;
+}
+
+.jumbotron h1 {
+  font-family: 'Bungee', cursive;
+}
+
+#basic-addon2 {
+  cursor: pointer;
+}
+
 .row {
+  background-color: #eeeeee;
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
+  border-radius: 6px;
+  opacity: .9;
 }
 
 .image-col {
@@ -19,26 +65,50 @@ body {
 
 .game-on {
   max-width: 75px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-#users {
+.footer {
+  margin-top: 20px;
+  position: absolute;
   width: 100%;
-}
-#top-25 {
-  width: 100%;
-}
-#offline {
-  width: 100%;
-}
-#all-friends {
-  width: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  text-align: center;
 }
 
-@media only screen and (max-width: 750px) {
+.footer a {
+  color: white;
+  padding-top: 5px;
+}
+
+@media only screen and (max-width: 766px) {
   .profile-image {
-    max-width: 300px;
+    max-width: 150px;
+  }
+  .button-row {
+    display: none;
+  }
+  .image-col {
+    text-align: center;
+    width: 100%;
   }
 
-  .button-holster row col-md-3 {
-    margin-top: 10px;
+  .game-on {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .jumbotron {
+    display: none;
+  }
+  .input-group {
+    margin-top: 80px;
+  }
 }
